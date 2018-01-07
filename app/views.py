@@ -15,9 +15,11 @@ from .models import Modele
 
 # Create your views here.
 
-def home(request):    
-    models = Modele.objects.all()
-    for i in 
+def home(request):
+    try:
+        models = Modele.objects.all().filter(admin=request.user)
+    except:
+        models = []
     # Retourne nombre1, nombre2 et la somme des deux au tpl
     return render(request, 'index.html', locals())
 
