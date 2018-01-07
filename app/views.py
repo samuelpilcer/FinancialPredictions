@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from .models import Modele, Layer
+from .models import Modele, Layer, TrainingFiles
 
 # Create your views here.
 
@@ -73,6 +73,12 @@ def model(request, id):
         layers = Layer.objects.all().filter(model=model)
     except:
         layers = []
+    try:
+        training_data=TrainingFiles.objects.all().filter(model=model)[0]
+        training_data_url=training_data.url
+    except:
+        training_data=[]
+        training_data_url=''
     return render(request, 'model.html', locals())
 
 def connexion(request):

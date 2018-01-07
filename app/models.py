@@ -32,3 +32,7 @@ class Layer(models.Model):
         nous traiterons plus tard et dans l'administration
         """
         return self.model
+
+class TrainingFiles(forms.Form):
+	model = models.ForeignKey(Modele)
+    file = forms.FileField()
