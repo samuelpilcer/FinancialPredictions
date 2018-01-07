@@ -23,8 +23,19 @@ def home(request):
     # Retourne nombre1, nombre2 et la somme des deux au tpl
     return render(request, 'index.html', locals())
 
+@login_required
 def new_model(request):
-    form = ModeleForm()
+    if request.method == 'POST':
+        form = ModeleForm(request.POST)
+        if form.is_valid():
+            new_model=Modele()
+            new_model.titre=form.cleaned_data.get('titre')
+            new_model.sous_titre=form.cleaned_data.get('sous_titre')
+            new_model.admin=request.user
+            new_model.save()
+            return redirect('home')
+    else:
+        form = ModeleForm()
     return render(request, 'new.html', {'form': form})
 
 def connexion(request):
