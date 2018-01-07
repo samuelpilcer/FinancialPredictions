@@ -11,11 +11,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from .models import Modele
 
 # Create your views here.
 
 def home(request):    
-
+    models = Modele.objects.all()
+    for i in 
     # Retourne nombre1, nombre2 et la somme des deux au tpl
     return render(request, 'index.html', locals())
 
