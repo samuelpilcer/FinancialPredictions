@@ -24,10 +24,8 @@ class InscriptionForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 class ModeleForm(forms.Form):
+    titre = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    sous_titre = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     class Meta:
         model = Modele
         fields=('titre','sous_titre',)
-        widgets = {
-            'titre': forms.TextInput(attrs={'placeholder':'Titre','class': 'form-control'}),
-            'sous_titre': forms.TextInput(attrs={'placeholder':"Phrase d'accroche",'class': 'form-control'}),
-        }
