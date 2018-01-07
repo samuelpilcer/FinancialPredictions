@@ -26,8 +26,8 @@ class InscriptionForm(UserCreationForm):
 class ModeleForm(forms.Form):
     titre = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     sous_titre = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    inputs = forms.IntegerField(required=True, widget=forms.IntegerInput(attrs={'class': 'form-control'}))
-    outputs = forms.IntegerField(required=True, widget=forms.IntegerInput(attrs={'class': 'form-control'}))
+    inputs = forms.IntegerField(required=True)
+    outputs = forms.IntegerField(required=True)
     class Meta:
         model = Modele
         fields=('titre','sous_titre','outputs','inputs',)
