@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from .models import Modele, Layers
+from .models import Modele, Layer
 
 # Create your views here.
 
@@ -48,7 +48,7 @@ def model(request, id):
         return redirect('home')
     models=[model]
     try:
-        models = Layers.objects.all().filter(model=model)
+        models = Layer.objects.all().filter(model=model)
     except:
         models = []
     return render(request, 'index.html', locals())
