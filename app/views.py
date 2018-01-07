@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from .forms import ConnexionForm, InscriptionForm, ModeleForm
+from .forms import ConnexionForm, InscriptionForm, ModeleForm, LayerForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout
 from django.core.urlresolvers import reverse
@@ -32,10 +32,31 @@ def new_model(request):
             new_model.titre=form.cleaned_data.get('titre')
             new_model.sous_titre=form.cleaned_data.get('sous_titre')
             new_model.admin=request.user
+            new_model.inputs = form.cleaned_data.get('inputs')
+            new_model.outputs = form.cleaned_data.get('outputs')
             new_model.save()
             return redirect('home')
     else:
         form = ModeleForm()
+    return render(request, 'new.html', {'form': form})
+
+@login_required
+def new_layer(request, id):
+    try:
+        model = Modele.objects.all().get(id=id)
+    except:
+        return redirect('home')
+    if request.method == 'POST':
+        form = LayerForm(request.POST)
+        if form.is_valid():
+            new_layer=Layer()
+            new_layer.model=model
+            new_layer.number=form.cleaned_data.get('number')
+            new_layer.activation=form.cleaned_data.get('activation')
+            new_layer.save()
+            return redirect('home')
+    else:
+        form = LayerForm()
     return render(request, 'new.html', {'form': form})
 
 @login_required
@@ -47,6 +68,7 @@ def model(request, id):
     if model.admin!=request.user:
         return redirect('home')
     models=[model]
+    id_model=id
     try:
         layers = Layer.objects.all().filter(model=model)
     except:

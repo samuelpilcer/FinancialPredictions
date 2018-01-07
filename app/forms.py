@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Modele
+from .models import Modele, Layer
 import sys
 sys.path.append("../")
 
@@ -31,3 +31,10 @@ class ModeleForm(forms.Form):
     class Meta:
         model = Modele
         fields=('titre','sous_titre','outputs','inputs',)
+
+class LayerForm(forms.Form):
+    activation = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    number = forms.IntegerField(required=True)
+    class Meta:
+        model = Layer
+        fields=('activation','number',)
