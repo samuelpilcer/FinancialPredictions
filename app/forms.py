@@ -38,3 +38,7 @@ class LayerForm(forms.Form):
     class Meta:
         model = Layer
         fields=('activation','number',)
+
+
+class TrainingField(forms.Form):
+    file = forms.FileField()
