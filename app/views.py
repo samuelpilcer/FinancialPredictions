@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from .forms import ConnexionForm, InscriptionForm
+from .forms import ConnexionForm, InscriptionForm, ModeleForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout
 from django.core.urlresolvers import reverse
