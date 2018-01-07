@@ -24,7 +24,9 @@ def home(request):
     return render(request, 'index.html', locals())
 
 def new_model(request):
-    return render(request, 'index.html', locals())
+    else:
+        form = ModeleForm()
+    return render(request, 'new.html', {'form': form})
 
 def connexion(request):
     error = False
