@@ -51,7 +51,7 @@ def model(request, id):
         layers = Layer.objects.all().filter(model=model)
     except:
         layers = []
-    return render(request, 'index.html', locals())
+    return render(request, 'model.html', locals())
 
 def connexion(request):
     error = False
