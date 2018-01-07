@@ -64,7 +64,7 @@
           <a href="#">Accueil</a>
         </li>
         {% if user.is_authenticated %}
-        <li class="breadcrumb-item active">Mes modèles</li>
+        <li class="breadcrumb-item active">{{ model.titre }}</li>
         {% endif %}
       </ol>
       <!-- Icon Cards-->
