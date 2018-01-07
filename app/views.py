@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from .forms import ConnexionForm, InscriptionForm
@@ -30,12 +31,6 @@ def connexion(request):
             if user:  # Si l'objet renvoyé n'est pas None
                 login(request, user)  # nous connectons l'utilisateur
                 next_url = request.GET.get('next')
-                try:
-                    user_data=UserData.objects.all().filter(user=user)[0]
-                    user_data.number_logs=user_data.number_logs+1
-                    user_data.save()
-                except:
-                    UserData(user).save()
                 if next_url:
                     return redirect(next_url)
             else: # sinon une erreur sera affichée
@@ -68,11 +63,10 @@ def inscription(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            UserData(user).save()
             return redirect('connexion')
     else:
         form = InscriptionForm()
-    return render(request, 'inscription.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 def deconnexion(request):
     logout(request)
