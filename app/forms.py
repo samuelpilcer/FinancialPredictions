@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Modele
 import sys
 sys.path.append("../")
 
@@ -21,3 +22,12 @@ class InscriptionForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+
+class ModeleForm(forms.Form):
+    class Meta:
+        model = Article
+        fields=('titre','sous_titre',)
+        widgets = {
+            'titre': forms.TextInput(attrs={'placeholder':'Titre','class': 'form-control'}),
+            'sous_titre': forms.TextInput(attrs={'placeholder':"Phrase d'accroche",'class': 'form-control'}),
+        }
