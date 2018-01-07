@@ -38,6 +38,17 @@ def new_model(request):
         form = ModeleForm()
     return render(request, 'new.html', {'form': form})
 
+@login_required
+def model(request, id):
+    try:
+        model = Modele.objects.all().get(id=id)
+    except:
+        return redirect('home')
+    if model.admin!=request.user:
+        return redirect('home')
+    models=[model]
+    return render(request, 'index.html', locals())
+
 def connexion(request):
     error = False
 
