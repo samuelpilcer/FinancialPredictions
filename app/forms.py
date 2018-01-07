@@ -25,7 +25,7 @@ class InscriptionForm(UserCreationForm):
 
 class ModeleForm(forms.Form):
     class Meta:
-        model = Article
+        model = Modele
         fields=('titre','sous_titre',)
         widgets = {
             'titre': forms.TextInput(attrs={'placeholder':'Titre','class': 'form-control'}),
