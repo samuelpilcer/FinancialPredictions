@@ -48,9 +48,9 @@ def model(request, id):
         return redirect('home')
     models=[model]
     try:
-        models = Layer.objects.all().filter(model=model)
+        layers = Layer.objects.all().filter(model=model)
     except:
-        models = []
+        layers = []
     return render(request, 'index.html', locals())
 
 def connexion(request):
