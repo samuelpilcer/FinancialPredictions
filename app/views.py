@@ -24,8 +24,7 @@ def home(request):
     return render(request, 'index.html', locals())
 
 def new_model(request):
-    else:
-        form = ModeleForm()
+    form = ModeleForm()
     return render(request, 'new.html', {'form': form})
 
 def connexion(request):
