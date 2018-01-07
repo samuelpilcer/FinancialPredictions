@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from .models import Modele, Layer, TrainingFiles
+from .models import Modele, Layer
 
 # Create your views here.
 
