@@ -23,6 +23,9 @@ def home(request):
     # Retourne nombre1, nombre2 et la somme des deux au tpl
     return render(request, 'index.html', locals())
 
+def new_model(request):
+    return render(request, 'index.html', locals())
+
 def connexion(request):
     error = False
 

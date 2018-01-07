@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home),
+    url(r'^new-model$', views.new_model, name='new-model'),
     url(r'^connexion$', views.connexion, name='connexion'),
     url(r'^inscription$', views.inscription, name='inscription'),
     url(r'^deconnexion$', views.deconnexion, name='deconnexion'),
