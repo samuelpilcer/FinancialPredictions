@@ -54,7 +54,7 @@ def new_layer(request, id):
             new_layer.number=form.cleaned_data.get('number')
             new_layer.activation=form.cleaned_data.get('activation')
             new_layer.save()
-            return redirect('home')
+            return redirect('/model/'+str(id))
     else:
         form = LayerForm()
     return render(request, 'new.html', {'form': form})
