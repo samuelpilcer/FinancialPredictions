@@ -28,7 +28,7 @@ SECRET_KEY = 'g4ndvz0sh*k=3&d1qpz-j5w$s7u7mk%bsq)2_g14*c)rd0jif('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 LOGIN_URL = '/connexion'
