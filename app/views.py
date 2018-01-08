@@ -79,6 +79,7 @@ def model(request, id):
     except:
         training_data=[]
         training_data_url=''
+    is_trained=False
     return render(request, 'model.html', locals())
 
 def connexion(request):
