@@ -73,7 +73,7 @@ def model(request, id):
     headers = {'Token':'test_password_12345'}
 
     url_create = 'http://m-learning.fr:50/create'
-    r_create=requests.get(url_create, headers=headers,json={"layers":[13,13,45],"inputs":784,"outputs":10,"description":"Test"}).json()["id"]
+    r_create=requests.get(url_create, headers=headers,data=data=json.dumps({"layers":[13,13,45],"inputs":784,"outputs":10,"description":"Test"})).json()["id"]
     print(r_create)
     if model.back_end_id == 0:
         is_trained=False
