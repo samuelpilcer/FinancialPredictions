@@ -12,6 +12,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from .models import Modele, Layer
+import requests
+import json
 
 # Create your views here.
 
@@ -67,6 +69,17 @@ def model(request, id):
         return redirect('home')
     if model.admin!=request.user:
         return redirect('home')
+
+
+    #if model.back_end_id == 0:
+    #    is_trained=False
+    #else:
+    #    url = 'http://m-learning.fr:50/'
+    #    payload = {'some': 'data'}
+    #    headers = {'content-type': 'application/json'}
+         
+    #    r = requests.post(url, data=json.dumps(payload), headers=headers)
+    print(requests.get("http://m-learning.fr:50/1", headers={'Token':'test_password_12345'}).json()["model"]["trained"])
     models=[model]
     id_model=id
     try:
@@ -81,6 +94,7 @@ def model(request, id):
         training_data_url=''
     is_trained=False
     return render(request, 'model.html', locals())
+#requests.get("http://m-learning.fr:50/1", headers={'Token':'test_password_12345'}).json()["model"]["trained"]
 
 def connexion(request):
     error = False
@@ -102,6 +116,9 @@ def connexion(request):
         form = ConnexionForm()
 
     return render(request, 'login.html', locals())
+
+def upload_file(request):
+    requests.get("http://m-learning.fr:50/1", headers={'Token':'test_password_12345'}).json()["model"]["trained"]
 
 def inscription(request):
     if request.method == 'POST':
