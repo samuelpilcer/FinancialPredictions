@@ -39,6 +39,5 @@ class LayerForm(forms.Form):
         model = Layer
         fields=('activation','number',)
 
-
-class TrainingField(forms.Form):
+class TrainingForm(forms.Form):
     file = forms.FileField()
