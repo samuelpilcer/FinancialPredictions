@@ -70,6 +70,8 @@ def model(request, id):
     if model.admin!=request.user:
         return redirect('home')
 
+    headers = {'Token':'test_password_12345'}
+
     url_create = 'http://m-learning.fr:50/create'
     r_create=requests.get(url_create, headers=headers,body={"layers":[13,13,45],"inputs":784,"outputs":10,"description":"Test"}).json()["id"]
     print(r_create)
@@ -77,7 +79,6 @@ def model(request, id):
         is_trained=False
     else:
         url = 'http://m-learning.fr:50/'+model.back_end_id
-        headers = {'Token':'test_password_12345'}
         r = requests.get(url, headers=headers)
         is_trained=r
     #print(requests.get("http://m-learning.fr:50/1", headers={'Token':'test_password_12345'}).json()["model"]["trained"])
