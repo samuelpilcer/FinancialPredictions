@@ -73,12 +73,14 @@ def model(request, id):
     if model.admin!=request.user:
         return redirect('home')
 
+    print("Back-end id : "+str(model.back_end_id))
     if model.back_end_id == 0:
         is_trained=False
     else:
         url = 'http://m-learning.fr:50/'+model.back_end_id
         r = requests.get(url, headers={'Token':'test_password_12345'}).json()["model"]["trained"]
         is_trained=r
+        print(r)
     #print(requests.get("http://m-learning.fr:50/1", headers={'Token':'test_password_12345'}).json()["model"]["trained"])
     models=[model]
     id_model=id
