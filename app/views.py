@@ -104,24 +104,17 @@ def train_model(request, id):
     if model_ML.admin!=request.user:
         return redirect('home')
     if request.method == 'POST':
-        
-        print('OK')
-        print(request.FILES)
-        print(request.POST)
         file = request.FILES['file']
         frame=pd.read_csv(file)
-        print(frame)
-        with open('file_'+str(model_ML.back_end_id)+'.txt', 'wb+') as destination:
-            for chunk in file.chunks():
-                spamwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-                destination.write(chunk)
-        print(file)
+
         url_create = 'http://m-learning.fr:50/create'
         r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps({'layers':[13,13,45],'inputs':784,'outputs':10,'description':'Test'})).json()["id"]
         model_ML.back_end_id=r_create
 
+        frame.to_csv('file_'+str(model_ML.back_end_id)+'.txt')
+
         url_upload = 'http://m-learning.fr:50/uploadtraining/'+str(model_ML.back_end_id)
-        files = {'file': open(file, 'rb')}
+        files = {'file': open('file_'+str(model_ML.back_end_id)+'.txt', 'rb')}
         r_upload = requests.post(url_upload, files=files)
         print(r_upload)
 
