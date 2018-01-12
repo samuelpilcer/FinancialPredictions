@@ -111,7 +111,7 @@ def train_model(request, id):
         model_ML.back_end_id=r_create
 
         url_upload = 'http://m-learning.fr:50/uploadtraining/'+str(model_ML.back_end_id)
-        files = {'file': file}
+        files = {'file': open(file, 'rb')}
         r_upload = requests.post(url_upload, files=files)
         print(r_upload)
 
