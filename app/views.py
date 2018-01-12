@@ -105,7 +105,7 @@ def train_model(request, id):
         
         print('OK')
         file = request.POST['file']
-        with open('files/file_'+str(model_ML.back_end_id)+'.txt', 'wb+') as destination:
+        with open('file_'+str(model_ML.back_end_id)+'.txt', 'wb+') as destination:
             for chunk in file.chunks():
                 destination.write(chunk)
         print(file)
