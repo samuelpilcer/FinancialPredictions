@@ -70,11 +70,6 @@ def model(request, id):
     if model.admin!=request.user:
         return redirect('home')
 
-    headers = {'Token':'test_password_12345', "Content-Type":"application/json"}
-
-    url_create = 'http://m-learning.fr:50/create'
-    r_create=requests.post(url_create, headers=headers,data=json.dumps({'layers':[13,13,45],'inputs':784,'outputs':10,'description':'Test'})).json()["id"]
-    print(r_create)
     if model.back_end_id == 0:
         is_trained=False
     else:
@@ -111,40 +106,20 @@ def train_model(request, id):
         if form.is_valid():
             file = form.cleaned_data.get('file')
             url_create = 'http://m-learning.fr:50/create'
-            r_create=requests.get(url_create, headers=headers,body={"layers":[13,13,45],"inputs":784,"outputs":10,"description":"Test"}).json()["id"]
+            r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps({'layers':[13,13,45],'inputs':784,'outputs':10,'description':'Test'})).json()["id"]
+            model.back_end_id=r_create
+
             url_upload = 'http://m-learning.fr:50/uploadtraining/'+model.back_end_id
-            url_train = 'http://m-learning.fr:50/'
-            r_create = requests.post(url, headers=headers)
-            r_train = requests.post(url, headers=headers)
-            return redirect('connexion')
+            files = {'file': file}
+            r_upload = requests.post(url_upload, files=files)
+            print(r_upload)
+
+            url_train = 'http://m-learning.fr:50/train/'+model.back_end_id
+            r_train = requests.post(url_train, headers={'Token':'test_password_12345', "Content-Type":"application/json"})
+            return model(request, id)
     else:
         form = TrainingForm()
-
-    r_create
-    r_train = requests.post(url, headers=headers)
-
-    if model.back_end_id == 0:
-        is_trained=False
-    else:
-        url = 'http://m-learning.fr:50/'+model.back_end_id
-        headers = {'Token':'test_password_12345'}
-        r = requests.post(url, headers=headers)
-        is_trained=r
-    #print(requests.get("http://m-learning.fr:50/1", headers={'Token':'test_password_12345'}).json()["model"]["trained"])
-    models=[model]
-    id_model=id
-    try:
-        layers = Layer.objects.all().filter(model=model)
-    except:
-        layers = []
-    try:
-        training_data=TrainingFiles.objects.all().filter(model=model)[0]
-        training_data_url=training_data.url
-    except:
-        training_data=[]
-        training_data_url=''
-    is_trained=False
-    return render(request, 'model.html', locals())
+        return render(request, 'form.html', locals())
 
 def connexion(request):
     error = False
