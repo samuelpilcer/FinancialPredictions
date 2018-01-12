@@ -113,6 +113,7 @@ def train_model(request, id):
         url_create = 'http://m-learning.fr:50/create'
         r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps({'layers':[13,13,45],'inputs':785,'outputs':10,'description':'Test'})).json()["id"]
         model_ML.back_end_id=r_create
+        model_ML.save()
         print(os.listdir('../MachineLearningAPI/static/training'))
         frame.to_csv('../MachineLearningAPI/static/training/training_'+str(model_ML.back_end_id)+'.csv', index=False)
         print(os.listdir('../MachineLearningAPI/static/training'))
