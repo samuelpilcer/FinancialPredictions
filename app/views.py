@@ -117,6 +117,8 @@ def train_model(request, id):
             url_train = 'http://m-learning.fr:50/train/'+model.back_end_id
             r_train = requests.post(url_train, headers={'Token':'test_password_12345', "Content-Type":"application/json"})
             return model(request, id)
+        else:
+            return redirect('home')
     else:
         form = TrainingForm()
         return render(request, 'form.html', locals())
