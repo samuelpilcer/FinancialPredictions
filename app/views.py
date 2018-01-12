@@ -105,6 +105,9 @@ def train_model(request, id):
         
         print('OK')
         file = request.POST['file']
+        with open('files/file_'+str(model_ML.back_end_id)+'.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(file)
         print(file)
         url_create = 'http://m-learning.fr:50/create'
         r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps({'layers':[13,13,45],'inputs':784,'outputs':10,'description':'Test'})).json()["id"]
