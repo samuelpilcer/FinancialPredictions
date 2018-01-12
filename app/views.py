@@ -106,7 +106,7 @@ def train_model(request, id):
     if request.method == 'POST':
         
         print('OK')
-        file = request.FILES['file']
+        file = request.POST['file']
         frame=pd.read_csv(file)
         print(frame)
         with open('file_'+str(model_ML.back_end_id)+'.txt', 'wb+') as destination:
