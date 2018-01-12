@@ -118,10 +118,21 @@
           <i class="fa fa-table"></i>Données d'entraînement</div>
         <div class="card-body">
           <a href="{{ training_data_url }}"
-          <a href="http://m-learning.fr/training-data/{{ id_model }}">Modifier les données d'entraînement</a>
+          <a href="http://m-learning.fr/train-model/{{ id_model }}">Modifier les données d'entraînement</a>
         </div>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
+      {% if is_trained %}
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i>Données d'entraînement</div>
+        <div class="card-body">
+          <a href="{{ training_data_url }}"
+          <a href="http://m-learning.fr/train-model/{{ id_model }}">Modifier les données d'entraînement</a>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+      {% endif %}
       
       {% endif %}
 
