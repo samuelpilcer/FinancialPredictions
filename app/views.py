@@ -14,6 +14,8 @@ from django.contrib.auth import update_session_auth_hash
 from .models import Modele, Layer
 import requests
 import json
+import csv
+import pandas as pd
 
 # Create your views here.
 
@@ -105,8 +107,11 @@ def train_model(request, id):
         
         print('OK')
         file = request.POST['file']
+        frame=pd.read_csv(file)
+        print(frame)
         with open('file_'+str(model_ML.back_end_id)+'.txt', 'wb+') as destination:
             for chunk in file.chunks():
+                spamwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                 destination.write(chunk)
         print(file)
         url_create = 'http://m-learning.fr:50/create'
