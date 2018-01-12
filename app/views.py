@@ -102,24 +102,21 @@ def train_model(request, id):
     if model.admin!=request.user:
         return redirect('home')
     if request.method == 'POST':
-        form = TrainingForm(request.POST, request.FILES)
-        if form.is_valid():
-            print('OK')
-            file = request.FILES['file']
-            url_create = 'http://m-learning.fr:50/create'
-            r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps({'layers':[13,13,45],'inputs':784,'outputs':10,'description':'Test'})).json()["id"]
-            model.back_end_id=r_create
+        
+        print('OK')
+        file = request.FILES['file']
+        url_create = 'http://m-learning.fr:50/create'
+        r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps({'layers':[13,13,45],'inputs':784,'outputs':10,'description':'Test'})).json()["id"]
+        model.back_end_id=r_create
 
-            url_upload = 'http://m-learning.fr:50/uploadtraining/'+model.back_end_id
-            files = {'file': file}
-            r_upload = requests.post(url_upload, files=files)
-            print(r_upload)
+        url_upload = 'http://m-learning.fr:50/uploadtraining/'+model.back_end_id
+        files = {'file': file}
+        r_upload = requests.post(url_upload, files=files)
+        print(r_upload)
 
-            url_train = 'http://m-learning.fr:50/train/'+model.back_end_id
-            r_train = requests.post(url_train, headers={'Token':'test_password_12345', "Content-Type":"application/json"})
-            return model(request, id)
-        else:
-            return redirect('home')
+        url_train = 'http://m-learning.fr:50/train/'+model.back_end_id
+        r_train = requests.post(url_train, headers={'Token':'test_password_12345', "Content-Type":"application/json"})
+        return model(request, id)
     else:
         form = TrainingForm()
         return render(request, 'form.html', locals())
