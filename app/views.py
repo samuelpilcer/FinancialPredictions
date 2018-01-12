@@ -137,7 +137,7 @@ def process_model(request, id):
         frame=pd.read_csv(file)
         frame.to_csv('../MachineLearningAPI/static/to_process/file_'+str(model_ML.back_end_id)+'.csv', index=False)
         url_process = 'http://m-learning.fr:50/process_file/'+str(model_ML.back_end_id)
-        r_process = requests.post(url_process, headers={'Token':'test_password_12345', "Content-Type":"application/json"})
+        r_process = requests.get(url_process, headers={'Token':'test_password_12345', "Content-Type":"application/json"})
         url_serve='../MachineLearningAPI/static/processed/file_'+str(model_ML.back_end_id)+'.csv'
         return serve(request, os.path.basename(url_serve), os.path.dirname(url_serve))
     else:
