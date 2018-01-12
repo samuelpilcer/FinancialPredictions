@@ -104,6 +104,7 @@ def train_model(request, id):
     if request.method == 'POST':
         form = TrainingForm(request.POST)
         if form.is_valid():
+            print('OK')
             file = form.cleaned_data.get('file')
             url_create = 'http://m-learning.fr:50/create'
             r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps({'layers':[13,13,45],'inputs':784,'outputs':10,'description':'Test'})).json()["id"]
