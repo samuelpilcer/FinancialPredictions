@@ -107,6 +107,7 @@ def train_model(request, id):
         
         print('OK')
         print(request.FILES)
+        print(request.POST)
         file = request.FILES['file']
         frame=pd.read_csv(file)
         print(frame)
