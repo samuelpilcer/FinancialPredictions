@@ -94,7 +94,6 @@ def model(request, id):
     except:
         training_data=[]
         training_data_url=''
-    is_trained=False
     return render(request, 'model.html', locals())
 #requests.get("http://m-learning.fr:50/1", headers={'Token':'test_password_12345'}).json()["model"]["trained"]
 
