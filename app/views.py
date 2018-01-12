@@ -112,6 +112,7 @@ def train_model(request, id):
 
         url_create = 'http://m-learning.fr:50/create'
         json_data={'layers':[13,13,45],'inputs':model_ML.inputs,'outputs':model_ML.outputs,'description':'Test'}
+        print(json_data)
         r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps(json_data)).json()["id"]
         model_ML.back_end_id=r_create
         model_ML.save()
