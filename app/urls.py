@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^model/(\d+)$', views.model, name='model'),
     url(r'^new-layer/(\d+)$', views.new_layer, name='new-layer'),
     url(r'^train-model/(\d+)$', views.train_model, name='train_model'),
+    url(r'^process-model/(\d+)$', views.process_model, name='process_model'),
     url(r'^connexion$', views.connexion, name='connexion'),
     url(r'^inscription$', views.inscription, name='inscription'),
     url(r'^deconnexion$', views.deconnexion, name='deconnexion'),
