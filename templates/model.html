@@ -106,7 +106,7 @@
           <i class="fa fa-table"></i>Etat du réseau</div>
         <div class="card-body">
           {% if is_trained %}
-          <button type="button" class="btn btn-lg btn-success" disabled>Réseau entrainé</button>
+          <button type="button" class="btn btn-lg btn-success" disabled>Réseau entrainé. Accuracy : {{ accuracy }}</button>
           {% else %}
           <button type="button" class="btn btn-lg btn-warning" disabled>Réseau non entrainé</button>
           {% endif %}
