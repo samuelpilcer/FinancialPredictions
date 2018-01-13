@@ -111,6 +111,11 @@ def train_model(request, id):
         return redirect('home')
     if request.method == 'POST':
         file = request.FILES['file']
+        if ("epochs" in request.POST):
+            epochs=request.POST['epochs']
+        else:
+            epochs=1
+        print(epochs)
         frame=pd.read_csv(file)
         inputs=frame.shape[1]-1
         url_create = 'http://m-learning.fr:50/create'
@@ -128,7 +133,7 @@ def train_model(request, id):
         frame.to_csv('../MachineLearningAPI/static/training/training_'+str(model_ML.back_end_id)+'.csv', index=False)
         print(os.listdir('../MachineLearningAPI/static/training'))
         url_train = 'http://m-learning.fr:50/train/'+str(model_ML.back_end_id)
-        json_training_data={"description":"Test", "training_file":"static/training/training_3.csv", "training_columns":784, "output_column":785, "epochs":1}
+        json_training_data={"epochs":epochs,"description":"Test", "training_file":"static/training/training_3.csv", "training_columns":784, "output_column":785, "epochs":1}
         r_train = requests.post(url_train, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps(json_training_data))
         return model(request, id)
     else:
