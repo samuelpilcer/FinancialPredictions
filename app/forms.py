@@ -41,3 +41,7 @@ class LayerForm(forms.Form):
 
 class TrainingForm(forms.Form):
     file = forms.FileField()
+    epochs = forms.IntegerField(required=True)
+
+class ProcessForm(forms.Form):
+    file = forms.FileField()

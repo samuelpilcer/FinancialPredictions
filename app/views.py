@@ -157,7 +157,7 @@ def process_model(request, id):
         url_serve='../MachineLearningAPI/static/processed/file_'+str(model_ML.back_end_id)+'.csv'
         return serve(request, os.path.basename(url_serve), os.path.dirname(url_serve))
     else:
-        form = TrainingForm()
+        form = ProcessForm()
         return render(request, 'form.html', locals())
 
 def connexion(request):
