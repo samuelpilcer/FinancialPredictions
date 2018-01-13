@@ -123,7 +123,7 @@ def train_model(request, id):
         frame.to_csv('../MachineLearningAPI/static/training/training_'+str(model_ML.back_end_id)+'.csv', index=False)
         print(os.listdir('../MachineLearningAPI/static/training'))
         url_train = 'http://m-learning.fr:50/train/'+str(model_ML.back_end_id)
-        r_train = requests.get(url_train, headers={'Token':'test_password_12345', "Content-Type":"application/json"})
+        r_train = requests.post(url_train, headers={'Token':'test_password_12345', "Content-Type":"application/json"})
         return model(request, id)
     else:
         form = TrainingForm()
