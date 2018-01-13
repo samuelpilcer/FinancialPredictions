@@ -114,7 +114,7 @@ def train_model(request, id):
         frame=pd.read_csv(file)
         inputs=frame.shape[1]-1
         url_create = 'http://m-learning.fr:50/create'
-        layers=Layer.objects.all().filter(model=model)
+        layers=Layer.objects.all().filter(model=model_ML)
         layers_table=[]
         for i in layers:
             layers_table.append({"activation":i.activation,"number":i.number})
