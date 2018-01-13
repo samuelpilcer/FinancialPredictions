@@ -88,7 +88,7 @@ def model(request, id):
     #print(requests.get("http://m-learning.fr:50/1", headers={'Token':'test_password_12345'}).json()["model"]["trained"])
     models=[model]
     id_model=id
-    layers=Layer.objects.all().get(model=model)
+    layers=Layer.objects.all().filter(model=model)
     for i in layers:
         print(i)
     try:
