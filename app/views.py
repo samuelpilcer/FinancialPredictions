@@ -89,9 +89,9 @@ def model(request, id):
     models=[model]
     id_model=id
     layers=Layer.objects.all().filter(model=model)
+    layers_table=[]
     for i in layers:
-        print(i.activation)
-        print(i.number)
+        layers_table.append({"activation":i.activation,"number":i.number})
     try:
         layers = Layer.objects.all().filter(model=model)
     except:
