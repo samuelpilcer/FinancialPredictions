@@ -88,6 +88,9 @@ def model(request, id):
     #print(requests.get("http://m-learning.fr:50/1", headers={'Token':'test_password_12345'}).json()["model"]["trained"])
     models=[model]
     id_model=id
+    layers=Layer.objects.all().get(model=model)
+    for i in layers:
+        print(i)
     try:
         layers = Layer.objects.all().filter(model=model)
     except:
@@ -116,6 +119,7 @@ def train_model(request, id):
         url_create = 'http://m-learning.fr:50/create'
         json_data={'layers':[{'number':13,'activation':'relu'},{'number':13,'activation':'sigmoid'},{'number':13,'activation':'relu'}],'inputs':inputs,'outputs':model_ML.outputs,'description':'Test'}
         print(json_data)
+
         r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps(json_data)).json()["id"]
         model_ML.back_end_id=r_create
         model_ML.save()
