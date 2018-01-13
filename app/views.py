@@ -111,7 +111,7 @@ def train_model(request, id):
         frame=pd.read_csv(file)
         inputs=frame.shape[1]-1
         url_create = 'http://m-learning.fr:50/create'
-        json_data={'layers':[13,13,45],'inputs':inputs,'outputs':model_ML.outputs,'description':'Test'}
+        json_data={'layers':[{'number':13,'activation':'relu'},{'number':13,'activation':'sigmoid'},{'number':13,'activation':'relu'}],'inputs':inputs,'outputs':model_ML.outputs,'description':'Test'}
         print(json_data)
         r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps(json_data)).json()["id"]
         model_ML.back_end_id=r_create
