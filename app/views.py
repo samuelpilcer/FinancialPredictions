@@ -108,7 +108,7 @@ def train_model(request, id):
         return redirect('home')
     if request.method == 'POST':
         file = request.FILES['file']
-        frame=pd.read_csv(file, index=False)
+        frame=pd.read_csv(file)
         inputs=frame.shape[1]-1
         url_create = 'http://m-learning.fr:50/create'
         json_data={'layers':[13,13,45],'inputs':inputs,'outputs':model_ML.outputs,'description':'Test'}
