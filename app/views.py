@@ -90,7 +90,8 @@ def model(request, id):
     id_model=id
     layers=Layer.objects.all().filter(model=model)
     for i in layers:
-        print(i)
+        print(i.activation)
+        print(i.number)
     try:
         layers = Layer.objects.all().filter(model=model)
     except:
