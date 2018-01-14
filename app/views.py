@@ -80,18 +80,21 @@ def model(request, id):
         is_trained=False
         accuracy=0
     else:
-        url = 'http://m-learning.fr:50/'+str(model.back_end_id)
-        r = requests.get(url, headers={'Token':'test_password_12345'}).json()["model"]
-        if r['id_exists']:
-            is_trained=r["trained"]
-            if 'accuracy' in r:
-                accuracy=r["accuracy"]
+        try:
+            url = 'http://m-learning.fr:50/'+str(model.back_end_id)
+            r = requests.get(url, headers={'Token':'test_password_12345'}).json()["model"]
+            if r['id_exists']:
+                is_trained=r["trained"]
+                if 'accuracy' in r:
+                    accuracy=r["accuracy"]
+                else:
+                    accuracy=0
             else:
+                is_trained=False
                 accuracy=0
-        else:
+        except:
             is_trained=False
             accuracy=0
-        print(r)
     #print(requests.get("http://m-learning.fr:50/1", headers={'Token':'test_password_12345'}).json()["model"]["trained"])
     models=[model]
     id_model=id
