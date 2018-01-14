@@ -135,7 +135,7 @@ def train_model(request, id):
         layers_table=[]
         for i in layers:
             layers_table.append({"activation":i.activation,"number":i.number})
-        json_data={'layers':layers_table,'inputs':inputs,'outputs':model_ML.outputs,'description':'Test'}
+        json_data={'mode':model_ML.mode,'layers':layers_table,'inputs':inputs,'outputs':model_ML.outputs,'description':'Test'}
         print(json_data)
 
         r_create=requests.post(url_create, headers={'Token':'test_password_12345', "Content-Type":"application/json"},data=json.dumps(json_data)).json()["id"]
