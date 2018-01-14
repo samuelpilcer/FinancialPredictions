@@ -32,7 +32,7 @@ class ModeleForm(forms.Form):
     sous_titre = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     inputs = forms.IntegerField(required=True)
     outputs = forms.IntegerField(required=True)
-    mode = forms.MultipleChoiceField(widget=forms.MultipleChoiceField,
+    mode = forms.ChoiceField(widget=forms.RadioSelect,
                                              choices=MODELE_OPTIONS)
     class Meta:
         model = Modele
