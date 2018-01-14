@@ -24,13 +24,19 @@ class InscriptionForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 class ModeleForm(forms.Form):
+    MODELE_OPTIONS = (
+                ("Classification", "classification"),
+                ("Regression", "regression"),
+                )
     titre = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     sous_titre = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     inputs = forms.IntegerField(required=True)
     outputs = forms.IntegerField(required=True)
+    mode = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                             choices=MODELE_OPTIONS)
     class Meta:
         model = Modele
-        fields=('titre','sous_titre','outputs','inputs',)
+        fields=('titre','sous_titre','outputs','inputs','mode',)
 
 class LayerForm(forms.Form):
     activation = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))

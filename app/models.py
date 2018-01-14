@@ -10,6 +10,7 @@ class Modele(models.Model):
     admin = models.ForeignKey(User)
     date = models.DateTimeField(auto_now_add=True, auto_now=False, 
                                 verbose_name="Date de parution")
+    mode = models.CharField(max_length=100)
     inputs = models.IntegerField(default=1)
     outputs = models.IntegerField(default=1)
     back_end_id = models.IntegerField(default=0)
