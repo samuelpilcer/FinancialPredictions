@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from .forms import ConnexionForm, InscriptionForm, ModeleForm, LayerForm, TrainingForm
+from .forms import ConnexionForm, InscriptionForm, ModeleForm, LayerForm, TrainingForm, ProcessForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout
 from django.core.urlresolvers import reverse
@@ -117,6 +117,7 @@ def train_model(request, id):
         return redirect('home')
     if request.method == 'POST':
         file = request.FILES['file']
+
         if ("epochs" in request.POST):
             epochs=request.POST['epochs']
         else:
