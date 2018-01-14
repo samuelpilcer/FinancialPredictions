@@ -40,6 +40,7 @@ def new_model(request):
             new_model.admin=request.user
             new_model.inputs = form.cleaned_data.get('inputs')
             new_model.outputs = form.cleaned_data.get('outputs')
+            new_model.mode = form.cleaned_data.get('mode')
             new_model.save()
             return redirect('home')
     else:
