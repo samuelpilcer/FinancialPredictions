@@ -159,9 +159,12 @@ def process_model(request, id):
         file = request.FILES['file']
         print(file.name)
 
-        print(file.name[-4:]==".csv")
-        print(file.name[-5:]==".xlsx")
-        frame=pd.read_csv(file)
+        if(file.name[-4:]==".csv"):
+            frame=pd.read_csv(file)
+        elif(file.name[-5:]==".xlsx"):
+            frame=pd.read_excel(file)
+        else:
+            frame=pd.DataFrame([])
         frame.to_csv('../MachineLearningAPI/static/to_process/file_'+str(model_ML.back_end_id)+'.csv', index=False)
         url_process = 'http://m-learning.fr:50/process_file/'+str(model_ML.back_end_id)
         r_process = requests.get(url_process, headers={'Token':'test_password_12345', "Content-Type":"application/json"})
