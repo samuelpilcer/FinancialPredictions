@@ -123,7 +123,12 @@ def train_model(request, id):
         else:
             epochs=1
         print(epochs)
-        frame=pd.read_csv(file)
+        if(file.name[-4:]==".csv"):
+            frame=pd.read_csv(file)
+        elif(file.name[-5:]==".xlsx"):
+            frame=pd.read_excel(file)
+        else:
+            frame=pd.DataFrame([])
         inputs=frame.shape[1]-1
         url_create = 'http://m-learning.fr:50/create'
         layers=Layer.objects.all().filter(model=model_ML)
@@ -157,8 +162,6 @@ def process_model(request, id):
         return redirect('home')
     if request.method == 'POST':
         file = request.FILES['file']
-        print(file.name)
-
         if(file.name[-4:]==".csv"):
             frame=pd.read_csv(file)
         elif(file.name[-5:]==".xlsx"):
