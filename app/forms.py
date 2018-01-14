@@ -25,8 +25,8 @@ class InscriptionForm(UserCreationForm):
 
 class ModeleForm(forms.Form):
     MODELE_OPTIONS = (
-                ("Classification", "classification"),
-                ("Regression", "regression"),
+                ("classification", "Classification"),
+                ("regression", "Regression"),
                 )
     titre = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     sous_titre = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
